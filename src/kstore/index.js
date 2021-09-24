@@ -1,9 +1,10 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex from './kvuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+// export default new Vuex.Store({
+const vuex = new Vuex({
   state: {
     counter: 0
   },
@@ -25,3 +26,7 @@ export default new Vuex.Store({
     }
   }
 })
+
+// console.log(vuex._vm._data.$$state.counter = 2)
+
+export default vuex
