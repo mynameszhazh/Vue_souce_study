@@ -10,8 +10,11 @@
 
 <script>
 import Schema from 'async-validator'
+import emitter from '@/utils/emitted'
 
 export default {
+  componentName: 'kFromItem',
+  mixins: [emitter],
   inject: ['form'],
   props: {
     label: {
@@ -57,9 +60,11 @@ export default {
     // this.$bus.$on('input', (value) => {
     // })
     this.$on('validate', () => {
-      // console.log('validate')
       this.validate()
     })
+    if (this.prop) {
+      this.dispatch('kFrom', 'el.from.validate', [this])
+    }
   },
   destroyed () {
     this.$bus.$off('input')

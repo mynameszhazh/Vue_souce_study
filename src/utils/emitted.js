@@ -24,10 +24,10 @@ export default {
         }
       }
       if (parent) {
+        // 注意了注意了 这个第三个参数是一个数组。。
         parent.$emit.apply(parent, [eventName].concat(params))
       }
     },
-    // 要知道一些东西的使用是很不错的
     broadcast (componentName, eventName, params) {
       broadcast.call(this, componentName, eventName, params)
     }

@@ -12,6 +12,7 @@ class Kvuex {
     // })
 
     // 这样的一个写法我的一个vue实例在外面是看不到的
+    this._getter = options.getter
     this._vm = new Vue({
       data: {
         $$state: options.state
@@ -19,7 +20,7 @@ class Kvuex {
     })
     // this._getter = new Vue({
     //   computed: {
-    //     $$state: options.state
+    //     $$state: options.getter
     //   }
     // })
     // 如果不是这样的一个操作是由问题的一个存在，你知道这是为什么吗？因为这个东西 就没有commit的了 到后面我的那个dispatch

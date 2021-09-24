@@ -69,19 +69,19 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, form, next) => {
-//   if (to.meta.auto) {
-//     console.log('home')
-//     if (!(window.sessionStorage.getItem('islogin') !== 'false')) {
-//       next('/login?redirect=' + to.fullPath)
-//     } else {
-//       console.log('111')
-//       next()
-//     }
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, form, next) => {
+  if (to.meta.auto) {
+    console.log('home')
+    if (!(window.sessionStorage.getItem('islogin') !== 'false')) {
+      next('/login?redirect=' + to.fullPath)
+    } else {
+      console.log('111')
+      next()
+    }
+  } else {
+    next()
+  }
+})
 
 // 关于动态addRouter 这样的操作，是需要一些逻辑上的一些判断发生小小的变化的
 // 这个判断的机制在于左右的都要进行一个判断 吗

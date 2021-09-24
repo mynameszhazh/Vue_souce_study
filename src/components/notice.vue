@@ -34,6 +34,8 @@ export default {
       this.isshow = false
       this.remove()
     },
+    // 想要更加简单的操作，这个组件本身的操作参数传递就是一个很了不起的东西
+    // 如果你想要用一个intall函数来进行一个疯转都是可以，这就是两个不同的选择方式罢了，不知道那个更好吧
     show () {
       this.isshow = true
       // 这种写法不是很优雅不是吗
