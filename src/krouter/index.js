@@ -33,6 +33,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    // 注意了，如果你要做到一个动态路由的使用，还是需要其它的操作来执行一个算法的运行这样
     children: [
       {
         path: '/about/detail/:id',
@@ -41,6 +42,11 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/Detail.vue')
+      },
+      {
+        path: '/about/info',
+        name: 'info',
+        component: () => import('../views/info.vue')
       }
     ]
   },
