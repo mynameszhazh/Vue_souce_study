@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自己实现一个vue</title>
+</head>
+<body>
+  <div id='app'>{{counter}}</div>
+
+  <script src="./Compiler.js"></script>
+  <script src="./Observer.js"></script>
+  <script src="./Kvue.js"></script>
+
+  <script>
+    let app = new Kvue({
+      el: '#app',
+      data: {
+        counter: 0
+      }
+    })
+    setInterval(() => {
+      app.counter++
+    }, 3000)
+  </script>
+</body>
+</html>
