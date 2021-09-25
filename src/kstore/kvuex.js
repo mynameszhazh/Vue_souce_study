@@ -27,11 +27,6 @@ class Kvuex {
       },
       computed
     })
-    // this._getter = new Vue({
-    //   computed: {
-    //     $$state: options.getter
-    //   }
-    // })
     // 如果不是这样的一个操作是由问题的一个存在，你知道这是为什么吗？因为这个东西 就没有commit的了 到后面我的那个dispatch
     this.commit = this.commit.bind(this)
     this.dispatch = this.dispatch.bind(this)
@@ -55,6 +50,7 @@ class Kvuex {
     }
   }
 
+  // 这里我觉得没有什么神奇的地方，可能在一些优化的地方，要考虑一些业务的地方要使用很多的东西来进行一个实现才是上策
   dispatch (type, payload) {
     const entry = this._actions[type]
     if (entry) {
