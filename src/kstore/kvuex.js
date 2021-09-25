@@ -7,16 +7,25 @@ class Kvuex {
     this._mutations = options.mutations
     this._actions = options.actions
     // 如果想要一个只读的属性利用vue的一些机制真的很方便，
-    // this.state = new Vue({
-    //   data: options.state
-    // })
-
+    this._getter = options.getters
+    this.getters = {}
+    const computed = {}
     // 这样的一个写法我的一个vue实例在外面是看不到的
-    this._getter = options.getter
+    const store = this
+    Object.keys(this._getter).forEach(key => {
+      const fn = store._getter[key]
+      computed[key] = function () {
+        return fn(store.state)
+      }
+      Object.defineProperty(store.getters, key, {
+        get: () => store._vm[key]
+      })
+    })
     this._vm = new Vue({
       data: {
         $$state: options.state
-      }
+      },
+      computed
     })
     // this._getter = new Vue({
     //   computed: {
