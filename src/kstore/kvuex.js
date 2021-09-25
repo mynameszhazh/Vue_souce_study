@@ -10,19 +10,29 @@ class Kvuex {
     // this.state = new Vue({
     //   data: options.state
     // })
-
+    this._getter = options.getters
+    const computed = {}
+    // 有些东西一定要注意了，this和 const 定义在类中是完全不一样的东西
+    this.getters = {}
+    const store = this
+    Object.keys(this._getter).forEach(key => {
+      // 前面指着一些都是为了一件事，让这个getter变成一个可以变换的响应式数据这样
+      const fn = store._getter[key]
+      computed[key] = function () {
+        return fn(store.state)
+      }
+      // 分配只读属性这样
+      Object.defineProperty(store.getters, key, {
+        get: () => store._vm[key]
+      })
+    })
     // 这样的一个写法我的一个vue实例在外面是看不到的
-    this._getter = options.getter
     this._vm = new Vue({
       data: {
         $$state: options.state
-      }
+      },
+      computed: computed
     })
-    // this._getter = new Vue({
-    //   computed: {
-    //     $$state: options.getter
-    //   }
-    // })
     // 如果不是这样的一个操作是由问题的一个存在，你知道这是为什么吗？因为这个东西 就没有commit的了 到后面我的那个dispatch
     this.commit = this.commit.bind(this)
     this.dispatch = this.dispatch.bind(this)
@@ -46,6 +56,7 @@ class Kvuex {
     }
   }
 
+  // 这里我觉得没有什么神奇的地方，可能在一些优化的地方，要考虑一些业务的地方要使用很多的东西来进行一个实现才是上策
   dispatch (type, payload) {
     const entry = this._actions[type]
     if (entry) {
