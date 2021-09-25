@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/animate.css/3.5.1/animate.css"
+      rel="stylesheet"
+    />
+    <script src="https://at.alicdn.com/t/font_2823649_2h77n8gqo8b.js"></script>
+    <style>
+      .fade-enter,
+      .fade-leave-to {
+        opacity: 0;
+      }
+      .fade-enter-active,
+      .fade-leave-active {
+        transition: opacity 1.5s;
+      }
+      /* 这样的样式修改到时候肯定是要进行一个优化操作这个样子才能更好的进行一个使用不是吗？ */
+      .icon {
+        /* 这个大小我是学到了一点点的东西的，就是我当前这个文字的大小 */
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+    </style>
+    <title>关于一些vue的基本使用</title>
+  </head>
+  <body>
+    <div id="watch-example">
+      <!--  加了这个sync同步语法之后就可以在我的子组件中也是用这个东西的操做也是很牛逼的一个操做 -->
+      <message ref="msgTitle" :show.sync="isshow">
+        <template v-slot:start="props">年后：{{props}}</template>
+        <template v-slot:header> 你真的是啥也不是 </template>
+        <template v-slot:title> <p>咱是个标题这个样子</p> </template>
+      </message>
+      <!-- 我的这个绑定我看到了一些他不应该存在的东西，就是关于一个bind钩子函数是第一次渲染的，后面就不会触发这个操作了，这个我又一次得到了肯定 -->
+      <input v-model="title" v-focus />
+      <button @click="add" v-permission="admin">添加</button>
+      <headerindg :level="1" :title="title" icon="gou">{{answer}}</headerindg>
+      <h2 :title="title">
+        <!-- 这个东西的使用，真的可以这么方便的吗？我都是觉得这个东西是真的有点牛逼了 -->
+        <svg class="icon">
+          <use xlink:href="#icon-gou"></use>
+        </svg>
+        {{ answer }}
+      </h2>
+    </div>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.5.9/vue.min.js"></script> -->
+    <!-- 这个地方就会存在一个版本的问题是没有问题，关于这个具名插槽的使用是在2.60之后的版本才能使用的一个东西 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.1/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+      // 这个东西一般登录之后，会保存一下我这个东西的一些数据，这个会根据你的一些信息，到一个你对应的数据库中找到你的对应角色，
+      const role = "admin2";
+
+      Vue.prototype.$bus = new Vue();
+      function fn() {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve("这是一个新的数据这个样子");
+          }, 2000);
+        });
+      }
+      //  这样自定义指令的操作，里面是存在很多的钩子函数的，我是用的inseted是其中一个
+      // bind这个钩子函数是用来做一个初始化的操作是比较好的
+      Vue.directive("focus", {
+        bind(el) {
+          // console.log(el);
+          // 这个地方的一些操作是可以做到赋值这样的低级操作，但是
+          // 这个bind 一定要注意的一个事情就是，他只有我的页面小第一个vdom 操作的时候，用到他的时候，才会执行这个操作，然后，在其他的东西改变的时候，这个操作就显得狠点多余了
+          el.value = "niaho";
+        },
+        inserted(el) {
+          // 这样的一些操作需要到这里进行，就像是一个我获取到这个dom元素，需要动画，颜色，还是什么东西，都是可以进行一个这样的操作来处理我想要处理的一些数据，这个操作还是很好用的一个操作，也是加快我们效率的一个很好用的小技巧这个样子了
+          // el.focus();
+          // console.log(el);
+        },
+        update() {
+          //  这个里面的一些操作，或者说我外面的一些操作发生了改变都是会影响到我这个东西值得一些改变，这个是肯定没有什么很大得问题得这个东西就是这样使用，很好得以后个操作我很喜欢
+          // console.log('更新了，更新了。。。。')
+        },
+      });
+      Vue.directive("permission", {
+        inserted(el, binding) {
+          // console.log(binding);
+          if (role !== binding.value) {
+            el.parentElement.removeChild(el);
+          }
+        },
+      });
+      Vue.component("message", {
+        props: ["show"],
+        template: `
+          <transition name="fade" mode="out-in"  enter-active-class="animated tada delay-2" leave-active-class="animated bounceOutRight" appear>
+            <div class='messageBox' v-if='show'>
+              <slot name="start" :user='user' :names="user"></slot>
+              <span @click="$emit('update:show',false)">×</span>
+            </div>  
+          </transition>
+        `,
+        data() {
+          return {
+            user: {
+              lastName: "xjh",
+            },
+            name: {
+              age: 18,
+            },
+          };
+        },
+        mounted() {
+          this.$bus.$on("aaaa", () => {
+            this.names();
+          });
+        },
+        methods: {
+          names() {
+            console.log(this.user.lastName);
+          },
+        },
+      });
+      Vue.component("headerindg", {
+        props: {
+          level: {
+            type: Number,
+            require: true,
+            default: 3,
+          },
+          title: {
+            type: String,
+            require: true,
+            default: "xjh",
+          },
+          icon: {
+            type: String,
+            default: "",
+          },
+        },
+
+        render(h) {
+          // 子节点的一些操作这个才对是不是
+          let children = [];
+          // 如果你想用到一个render函数来进行一个函数的操作的话就是需要这样的一个操作，这个东西可能你可以使用到也说不定。。
+          if (this.icon) {
+            children.push(
+              h(
+                "svg",
+                // 这个操作我不是很懂，估计就是一个attrs的一个语法糖这个样子的解释还是很好的
+                { class: "icon" },
+                // 这个标签的使用还是有一个子属性这个样子的就是一个套娃一样的操作就完事了，这样的操作之后就可以得到很好的一个验证这个样子的操作了
+                // 注意了，这个children的最原始的操作就是一个数组一样的操作也是可以的，就像是一个
+                [
+                  h(
+                    "use",
+                    // <use xlink:href="#icon-gou"></use>
+                    { attrs: { "xlink:href": "#icon-" + this.icon } }
+                  ),
+                ]
+              )
+            );
+          }
+          children = children.concat(this.$slots.default);
+          // 这个render函数里面东西非常多的一个操作的，一开始是一个等级的事情这样子，然后就是关于这个插槽中的一些操作这个也是一个必须的操作了
+          // 这个参数里面选择的数据模式是非常多的，可以是一个函数组件之类的操作，这个也是一个必须的操作没有办法
+          let vnode = h(
+            "h" + this.level,
+            //  这个参数的作用也很明显了，就是在我上面的标签不作用的时候，也能传递的一些个属性的内容
+            { attrs: { title: this.title, name: "xjh" } },
+            //  这个标签的作用就是一个我在我的标签中写一些东西的使用可以使用的一些个操作，{{}}这样的操作还是很明显得一个操作
+            // 这个东西就是一个children 如果知道这个的时候，就能更加理解这个render函数的操作了，这个操作肯定是没有上面问题的一个操作
+            children
+          );
+          console.log(vnode);
+          return vnode;
+        },
+      });
+      var watchExampleVM = new Vue({
+        el: "#watch-example",
+        data() {
+          return {
+            answer: "啥也不是",
+            title: "mynameiszhazh",
+            isshow: false,
+            admin: "admin",
+            user: {
+              lastName: "xjh",
+            },
+            name: " zheshi",
+          };
+        },
+        async created() {
+          const a = await fn();
+          this.answer = a;
+        },
+        methods: {
+          add() {
+            this.$refs.msgTitle.names();
+            // this.$bus.$emit("aaaa");
+            this.isshow = true;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

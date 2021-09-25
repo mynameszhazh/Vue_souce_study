@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <hoc></hoc>
+    </div>
+        <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.1/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+      const withPromise = (wrapped, promiseFn) => {
+        return {
+          name: "with-promise",
+          data() {
+            return {
+              loading: false,
+              error: false,
+              result: null,
+            };
+          },
+          async mounted() {
+            this.loading = true;
+            const result = await promiseFn().finally(() => {
+              this.loading = false;
+            });
+            this.result = result;
+          },
+          render(h) {
+            return h(wrapped, {
+              props: {
+                result: this.result,
+                loading: this.loading,
+              },
+            });
+          },
+        };
+      };
+      const view = {
+        template: `
+          <span>
+            <span>{{result?.name}}</span>
+          </span>
+        `,
+        props: ["result", "loading"],
+      };
+
+      // 假装这是一个 axios 请求函数
+      const request = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({ name: "ssh" });
+          }, 1000);
+        });
+      };
+
+      const hoc = withPromise(view, request);
+      var app = new Vue({
+        el: "#app",
+        components: {
+          hoc,
+        },
+      });
+    </script>
+  </body>
+</html>
