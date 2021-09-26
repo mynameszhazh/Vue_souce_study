@@ -7,7 +7,11 @@
   <title>自己实现一个vue</title>
 </head>
 <body>
-  <div id='app'>{{counter}}</div>
+  <div id='app'>
+    <p >{{counter}}</p>
+    <p x-text='counter'></p>
+    <p x-html='des'></p>
+  </div>
 
   <script src="./Compiler.js"></script>
   <script src="./Observer.js"></script>
@@ -17,12 +21,13 @@
     let app = new Kvue({
       el: '#app',
       data: {
-        counter: 0
+        counter: 0,
+        des: '<span style="color: red; border:1px solid red;" >123123</span>'
       }
     })
-    setInterval(() => {
-      app.counter++
-    }, 3000)
+    // setInterval(() => {
+    //   app.counter++
+    // }, 3000)
   </script>
 </body>
 </html>
