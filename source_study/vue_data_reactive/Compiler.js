@@ -38,7 +38,7 @@ class Compiler {
   }
 
   compilerText(node) {
-    node.textContent = this.$vm[RegExp.$1]
+    this.updata(node, RegExp.$1, 'text')
   }
 
   // 实现一个以x-开头的插入方式，方法， 你想要一个什么样的功能就做什么样的代码
@@ -60,14 +60,52 @@ class Compiler {
     // return /^('x-')[1]/.test(name)
     return name.indexOf('x-') === 0
   }
+
+  updata(node, exp, direction) {
+    const fn = this[direction + 'updater']
+    fn && fn(node, this.$vm[exp])
+    new Watcher(this.$vm, exp, function (val) {
+      fn && fn(node, val)
+    })
+  }
+
   // x-text
   text(node, value) {
     // 这里就是做了一个赋值的操作很简单，但是确实非常有趣的一个东西，这里过来然后过去的感觉还是很不错的一个操作
-    node.textContent = this.$vm[value]
+    // node.textContent = this.$vm[value]
+    this.updata(node, value, 'text')
+  }
+
+  textupdater(node,value) {
+    // console.log(value)
+    node.textContent = value
   }
 
   html(node, value) {
-    node.innerHTML = this.$vm[value]
+    // console.log( value)
+    this.updata(node, value, 'html')
   }
 
+  htmlupdater(node ,value) {
+    // console.log(value)
+    node.innerHTML = value
+  }
+
+}
+
+// const wathcers = []
+class Watcher {
+  constructor(vm, key, updataFn) {
+    this.vm = vm
+    this.key=key
+    this.updataFn = updataFn
+    // wathcers.push(this)
+    Dep.target = this
+    this.vm[this.key]
+    Dep.target = null
+  }
+  updata() {
+    // 这里要拿住的参数就是我vue实例里面的数据
+    this.updataFn.call(this.vm, this.vm[this.key])
+  }
 }
