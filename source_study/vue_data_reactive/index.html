@@ -11,6 +11,9 @@
     <p >{{counter}}</p>
     <p x-text='counter'></p>
     <p x-html='des'></p>
+    <input x-model='des' type="text" /><br>
+    <button @click='changeCounter'>按钮</button>
+
   </div>
 
   <script src="./Compiler.js"></script>
@@ -21,13 +24,19 @@
     let app = new Kvue({
       el: '#app',
       data: {
-        counter: 0,
+        counter: 1,
         des: '<span style="color: red; border:1px solid red;" >123123</span>'
-      }
+      },
+      methods: {
+        changeCounter() {
+          console.log(11)
+          this.counter ++
+        }
+      },
     })
-    setInterval(() => {
-      app.counter++
-    }, 3000)
+    // setInterval(() => {
+    //   app.counter++
+    // }, 3000)
   </script>
 </body>
 </html>

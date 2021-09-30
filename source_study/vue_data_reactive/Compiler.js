@@ -52,13 +52,24 @@ class Compiler {
       if(this.isDirection(name)) {
         const direction = name.substring(2)
         this[direction] && this[direction](node, value)
+      } else if (this.isEvent(name)) {
+        this.useEvent(node, value, name)
       }
     })
   }
 
+  useEvent(node, value, dir) {
+    const fn = this.$vm.$options.methods[value]
+    // console.log(fn)
+    const event = dir.substring(1)
+    node.addEventListener(event, fn.bind(this.$vm))
+  }
+
   isDirection(name) {
-    // return /^('x-')[1]/.test(name)
     return name.indexOf('x-') === 0
+  }
+  isEvent(name) {
+    return name.indexOf('@') === 0
   }
 
   updata(node, exp, direction) {
@@ -75,10 +86,21 @@ class Compiler {
     // node.textContent = this.$vm[value]
     this.updata(node, value, 'text')
   }
+  // x-model
+  model(node, value) {
+    this.updata(node, value, 'model')
+    node.addEventListener('input', (e) => {
+      this.$vm[value] = e.target.value
+    })
+  }
 
   textupdater(node,value) {
     // console.log(value)
     node.textContent = value
+  }
+  modelupdater(node,value) {
+    // 这里做的只有在我的input中的
+    node.value = value
   }
 
   html(node, value) {
@@ -107,5 +129,6 @@ class Watcher {
   updata() {
     // 这里要拿住的参数就是我vue实例里面的数据
     this.updataFn.call(this.vm, this.vm[this.key])
+
   }
 }

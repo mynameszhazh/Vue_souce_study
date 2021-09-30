@@ -3,6 +3,9 @@ class Observer {
     if(typeof obj === 'object') {
       this.objWalk(obj)
     }
+    else if(typeof obj === 'array') {
+      
+    }
   }
 
   // 解决一个响应式的问题呢

@@ -18,10 +18,23 @@ function defineReactive (obj, key, val) {
   })
 }
 
+const orignalArrPrototype = Array.prototype
+// // console.log(orignalArrPrototype['push']) 
+const newArrPrototype = Object.create(orignalArrPrototype);
+['pop','push','shift','unshift'].forEach(method => {
+  // console.log(method)
+  newArrPrototype[method] = function () {
+    orignalArrPrototype[method].apply(this, arguments)
+    console.log('执行数组方法')
+  }
+})
+
 // 这个里面的一些操作真的不是一般人能解决问题一个存在
 function set (obj, key, val) {
   defineReactive(obj, key, val)
 }
+
+console.log( [1,23,2] instanceof Object)
 
 function observer (obj) {
   if (typeof obj !== 'object' || obj === null) {
@@ -39,6 +52,6 @@ observer(obj)
 // obj.baz.a = 'fooooooooool'
 set(obj, 'dong', {b: 9})
 // obj.dong = '{b: 9}'
-setInterval(() => {
-  obj.age++
-}, 1000);
+// setInterval(() => {
+//   obj.age++
+// }, 1000);
