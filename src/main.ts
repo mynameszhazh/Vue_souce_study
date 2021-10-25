@@ -11,6 +11,8 @@ import Bus from './utils/bus'
 import create from './utils/createExtend'
 import toast from './utils/toast/index'
 
+import './test-ts'
+
 import './assets/css/animate.css'
 // import './assets/js/svg'
 
