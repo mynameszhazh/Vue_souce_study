@@ -14,5 +14,18 @@ module.exports = {
         // },
         proxy: 'http://localhost:3000'
     },
-    lintOnSave: false
+    lintOnSave: false,
+    devServer: {
+        before(app) {
+            app.get('/api/list', (req, res) => {
+                res.json([{
+                    id: 1,
+                    name: '老子叫捡回哦'
+                }, {
+                    id: 2,
+                    name: '老子不是一个傻逼'
+                }]);
+            })
+        }
+    }
 }
