@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Ref } from "vue-property-decorator";
+import { Component, Vue, Ref, Mixins } from "vue-property-decorator";
 import { getHomeUserList } from "@/api/home/userList";
 import { Feature } from "@/type/index";
 import { Form } from "element-ui";
@@ -27,6 +27,7 @@ import moment from "moment";
 
 // 验证vuex的ts使用
 import { namespace, Action, Mutation, State } from "vuex-class";
+import MyMixin from '@/minxin/test-mixin';
 // 这里使用的就是我模块的 user模块的内容了
 const userModule = namespace("user");
 
@@ -35,7 +36,7 @@ const userModule = namespace("user");
     // HelloWorld
   }
 })
-export default class Home extends Vue {
+export default class Home extends Mixins(MyMixin) {
   // 这个地方必须有一个初始值这样才能进行一个处理?
   public features: Feature[] = [];
   public golbalFeatures: Feature[] = [];
