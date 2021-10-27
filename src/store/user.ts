@@ -1,10 +1,10 @@
 import { UserState, RootState } from '../type/index';
 import {Module} from 'vuex';
-export const user: Module<UserState, RootState> = {
+const user: Module<UserState, RootState> = {
   namespaced: true,
   state: {
-    name: '',
-    token: ''
+    name: '老子叫减肥',
+    token: 'a mock token'
   },
   mutations: {
     setUser(state, {name, token}) {
@@ -13,3 +13,5 @@ export const user: Module<UserState, RootState> = {
     }
   }
 }
+
+export default user

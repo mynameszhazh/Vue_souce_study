@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import user from './user';
 import {RootState} from '../type/index';
 Vue.use(Vuex)
 
@@ -23,5 +24,8 @@ export default new Vuex.Store<RootState>({
         commit('add', payload)
       }, 1000)
     }
+  },
+  modules: {
+    user
   }
 })
