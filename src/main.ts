@@ -7,6 +7,7 @@ import store from './kstore'
 import headering from './plugin/headering'
 import message from './plugin/message'
 import Bus from './utils/bus'
+import ElementUI from 'element-ui';
 // import create from './utils/index.js'
 import create from './utils/createExtend'
 import toast from './utils/toast/index'
@@ -14,6 +15,7 @@ import toast from './utils/toast/index'
 import './test-ts'
 
 import './assets/css/animate.css'
+import 'element-ui/lib/theme-chalk/index.css';
 // import './assets/js/svg'
 
 Vue.config.productionTip = false
@@ -23,6 +25,7 @@ Vue.prototype.$bus = new Bus()
 Vue.use(headering)
 Vue.use(message)
 Vue.use(create)
+Vue.use(ElementUI)
 Vue.use(toast)
 
 new Vue({

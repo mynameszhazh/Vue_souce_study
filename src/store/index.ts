@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import {RootState} from '../type/index';
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export default new Vuex.Store<RootState>({
   state: {
     counter: 0
   },
