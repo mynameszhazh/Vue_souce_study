@@ -1,8 +1,16 @@
+
+const path = require('path')
+
+function resolve(paths) {
+  return path.resolve(__dirname, paths)
+}
+
+// 属于是一个node环境这个样子
 module.exports = {
   // 这个也不用我多说的一个东西，这个东西就是一个我配置文件的在生产环境和开发环境的重要配置
   publicPath: process.env.NODE_ENV === 'production'
     ? '/cart/'
-    : '/',
+    : '/cart/',
   devServer: {
     // 注意了这个app就是一个express的实例对象，这样我就可以自己不用多启动一个服务器就可以使用我自己的接口了
     // before (app) {
@@ -12,6 +20,20 @@ module.exports = {
     //     }, 1000)
     //   })
     // },
-    proxy: 'http://localhost:3000'
+    // proxy: 'http://localhost:3000'
+  },
+  // 传统的配置使用
+  configureWebpack: {
+    name: 'title'
+  },
+  // 链式的配置使用方式给
+  chainWebpack(config) {
+    config.module.rule('svg')
+      .exclude.add(resolve('./src/icons'))
+    config.module.rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('./src/icons')).end()
+      .use('svg-sprite-loader')
+        .options({SymbolID: 'icon-[name]'})
   }
 }
