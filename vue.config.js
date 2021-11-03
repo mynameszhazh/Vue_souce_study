@@ -2,7 +2,7 @@
 const path = require('path')
 
 function resolve(paths) {
-  return path.resolve(__dirname, paths)
+  return path.join(__dirname, paths)
 }
 
 // 属于是一个node环境这个样子
@@ -30,10 +30,12 @@ module.exports = {
   chainWebpack(config) {
     config.module.rule('svg')
       .exclude.add(resolve('./src/icons'))
+
     config.module.rule('icons')
       .test(/\.svg$/)
       .include.add(resolve('./src/icons')).end()
       .use('svg-sprite-loader')
-        .options({SymbolID: 'icon-[name]'})
+        .loader('svg-sprite-loader')
+        .options({symbolId: 'icon-[name]'})
   }
 }
