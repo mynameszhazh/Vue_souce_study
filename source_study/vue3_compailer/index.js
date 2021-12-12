@@ -6,9 +6,9 @@ const {logToJSON} = require('./utils/util')
 function compiler(template) {
   // 1.解析
   const ast = parse(template)
-  logToJSON(ast)
   // 2.做一些标记?
   transform(ast)
+  // logToJSON(ast)
   // 3.生成我想要的代码?
   const code = generator(ast)
   return code
