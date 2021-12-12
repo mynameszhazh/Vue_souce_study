@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  我是一个index页面
+  <a href="#test" onclick="handle('test')">test</a>
+  <a href="#testone" onclick="handle('testone')">test</a>
+  <iframe src="./test.html" id="content" frameborder="0"></iframe>
+
+  <script>
+    const iframe = document.querySelector('#content')
+    function handle(name) {
+      let tem = './'+ name +'.html'
+      setTimeout(() => {
+        console.log(tem)
+        iframe.src= tem
+      },0)
+    }
+  </script>
+</body>
+</html>
