@@ -8,7 +8,7 @@ function compiler(template) {
   const ast = parse(template)
   // 2.做一些标记?
   transform(ast)
-  // logToJSON(ast)
+  logToJSON(ast)
   // 3.生成我想要的代码?
   const code = generator(ast)
   return code
@@ -24,5 +24,4 @@ let templateStr = `<div id='app'>
 </div>`
 
 const a = compiler(templateStr)
-
-// console.log(a)
+console.log(a)
