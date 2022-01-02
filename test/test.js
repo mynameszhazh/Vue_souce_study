@@ -1,18 +1,29 @@
-let arr1 = []
-let subarr1 = [1, 2, 3]
-let subarr2 = [3, 4]
-let subarr3 = [11, 2, 13]
-arr1.push(subarr1,subarr2,subarr3)
-let temp = copyArr(arr1)
-temp[0].pop()
-console.log(temp)
-function copyArr(arr) {
-  let temp = []
-  arr.map(item => {
-    temp.push(item.slice(0))
-  })
-  return temp
+function Node (key = 0, left = null, right = null) {
+  this.key = key
+  this.left = left
+  this.right = right
 }
 
-console.log(arr1)
 
+/**
+ * 得到一个新的树节点
+ * @param {any} key 
+ * @returns Node
+ */
+function getNewNode (key) {
+  return new Node(key)
+}
+
+
+/**
+ * 不起作用的一个函数
+ * @param {Node} root 
+ * @returns void
+ */
+function clear(root) {
+  if(root == null) return
+  clear(root.left)
+  clear(root.right)
+  // delete root
+  return
+}
