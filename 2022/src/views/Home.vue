@@ -1,6 +1,5 @@
 <template>
   <div>{{home}}</div>
-  <!-- <router-view></router-view> -->
 </template>
 
 <script>
