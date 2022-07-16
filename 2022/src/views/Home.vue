@@ -7,7 +7,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      home: "我就是一个home",
+      home: "我就是一个home2",
     };
   },
 };
