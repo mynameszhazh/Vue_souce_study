@@ -1,10 +1,13 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <router-link to="/detail/1">detail1</router-link>
+    <router-link to="/detail/2">detail2</router-link>
     <router-view></router-view>
   </div>
 </template>
-<styles
+
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
