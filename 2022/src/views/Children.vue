@@ -1,10 +1,16 @@
 <template>
-  <div>我是 home 的一个 子组件: {{name}}</div>
+  <div class="children">
+    <div>我是 home 的一个 子组件: {{ name }}</div>
+    <button @click="changeFoo">chang foo</button>
+    <SubChildren></SubChildren>
+  </div>
 </template>
 
 <script>
+import SubChildren from "./SubChildren.vue";
 export default {
   name: "chilren",
+  inject: ['foo'],
   props: {
     name: {
       type: String,
@@ -15,6 +21,17 @@ export default {
       },
     },
   },
+  mounted() {
+    // console.log(this.$attrs);
+    // console.log(this.$listeners);
+    this.$listeners.change();
+  },
+  methods: {
+    changeFoo() {
+      this.foo = 'foo2' 
+    }
+  },
+  components: { SubChildren },
 };
 </script>
 

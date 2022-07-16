@@ -28,9 +28,9 @@
       }
     },
     mounted () {
-      console.log(this.$refs['box'].getBoundingClientRect().left) 
-      console.log(this.$refs['h1'].getBoundingClientRect().left) 
-      console.log(this.$refs['btn1'].getBoundingClientRect().left) 
+      // console.log(this.$refs['box'].getBoundingClientRect().left) 
+      // console.log(this.$refs['h1'].getBoundingClientRect().left) 
+      // console.log(this.$refs['btn1'].getBoundingClientRect().left) 
     },
     computed: {
       isLogin() {
