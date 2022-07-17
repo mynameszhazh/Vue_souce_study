@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>{{ home }}</div>
+    <div>{{ home }}-observable data{{count}}</div>
     <Children
       name="text"
       :title.sync="title"
@@ -12,6 +12,7 @@
 
 <script>
 import Children from "./Children.vue";
+import {store} from '../store/observable'
 export default {
   name: "Home",
   provide() {
@@ -29,6 +30,11 @@ export default {
       fooMsg: "这是 foo",
       title: '我是标题'
     };
+  },
+  computed: {
+    count() {
+      return store.count 
+    }
   },
   watch: {
     title(newValue, oldValue) {
