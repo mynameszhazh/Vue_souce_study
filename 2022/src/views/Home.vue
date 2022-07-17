@@ -3,7 +3,7 @@
     <div>{{ home }}</div>
     <Children
       name="text"
-      title="我是标题"
+      :title.sync="title"
       alt="alt"
       @change="change"
     ></Children>
@@ -27,7 +27,13 @@ export default {
     return {
       home: "我就是一个home2",
       fooMsg: "这是 foo",
+      title: '我是标题'
     };
+  },
+  watch: {
+    title(newValue, oldValue) {
+      console.log(newValue, oldValue)
+    }
   },
   created() {
     setTimeout(() => {

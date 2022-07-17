@@ -20,11 +20,17 @@ export default {
         return ["success", "text", "danger"].indexOf(value) !== -1;
       },
     },
+    title: {
+      type: String,
+      required: true,
+    }
   },
   mounted() {
     // console.log(this.$attrs);
     // console.log(this.$listeners);
-    this.$listeners.change();
+    // this.$listeners.change();
+    console.log(this.title)
+    this.$emit("update:title", '这是新的title')
   },
   methods: {
     changeFoo() {
