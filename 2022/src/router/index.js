@@ -11,7 +11,7 @@ const routes = [
     name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
-      auth: true
+      auth: false 
     },
     childrens: [],
     beforeEntry(to, from, next) {
@@ -24,7 +24,7 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     meta: {
-      auth: true
+      auth: false 
     },
     component: () => import('../views/Detail.vue')
   },
