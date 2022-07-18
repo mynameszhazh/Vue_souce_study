@@ -22,7 +22,7 @@ module.exports = {
       .loader('vue-loader')
       .tap(options => {
         options.transformAssetUrls = {
-          avatar: 'img-src',
+          SubChildren : 'img-url',
         }
         return options;
       });

@@ -2,7 +2,7 @@
   <div class="children">
     <div>我是 home 的一个 子组件: {{ name }} - {{ $log(logMsg) }}</div>
     <button @click="changeFoo">chang foo</button>
-    <SubChildren></SubChildren>
+    <SubChildren :img-url="imgMsg"></SubChildren>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
   inject: ["foo"],
   data() {
     return {
-      logMsg: '我就是一个打印信息' 
+      logMsg: '我就是一个打印信息',
+      imgMsg: null 
     }
   },
   props: {
@@ -29,6 +30,10 @@ export default {
       type: String,
       required: true,
     },
+  },
+  created () {
+    // this.imgMsg = require('../assets/logo.png')
+    this.imgMsg = '../assets/logo.png'
   },
   mounted() {
     // console.log(this.$attrs);

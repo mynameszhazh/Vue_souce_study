@@ -3,17 +3,17 @@
     <div>{{ home }}-observable data{{ count }}</div>
     <button @click="changeComponet">loginCom</button>
     <button @click="changeComponet(1)">chilrenCom</button>
-    <!-- <Children
+    <Children
       name="text"
       :title.sync="title"
       alt="alt"
       @change="change"
-    ></Children> -->
-    <transition name="slide-fade">
+    ></Children>
+    <!-- <transition name="slide-fade">
       <keep-alive>
         <component :is="currentComponent" name="text" title="titel"></component>
       </keep-alive>
-    </transition>
+    </transition> -->
   </div>
 </template>
 
