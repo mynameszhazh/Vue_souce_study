@@ -36,3 +36,22 @@ new Profile({propsData:{propsExtend:'我是实例传入的数据'}}).$mount('#ap
 // 通过 components 或 Vue.component()注册
 Vue.component('Profile',Profile)
 ```
+### v-cloak
+- 这个的验证需要，一个网络请求的方式才可以
+  - 还是会存在一些问题，就是这个只是一个 bloce而已， 肯定是没有其它的方式更好的 
+
+### vue 的键盘事件
+
+```js
+// 对应键盘上的关键字
+.enter
+.tab
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+```
+- 所以不只是 一个 `entry` 可以使用这样的方式
