@@ -11,14 +11,24 @@ export default {
     data() {
         return {};
     },
+    beforeRouteEnter(to, from, next) {
+      // console.log(to, 'beforeRouteEnter'); 
+      // console.log(from, 'beforeRouteEnter'); 
+      // console.log(next, 'beforeRouteEnter'); 
+      next()
+    },
+    beforeRouteUpdate(to, from ,next) {
+      // console.log(to, from ,next , 'beforeRouteUpdate'); 
+      next()
+    },
     watch: {
-        $route: {
-            immediate: true,
-            deep: true,
-            handler() {
-                console.log("router, change");
-            }
-        }
+      // $route: {
+        //     immediate: true,
+        //     deep: true,
+        //     handler() {
+        //         console.log("router, change");
+        //     }
+        // }
     },
     created () {
       console.log('created');

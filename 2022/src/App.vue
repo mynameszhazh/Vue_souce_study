@@ -3,11 +3,12 @@
     <img alt="Vue logo" src="./assets/logo.png" @click="goHome" />
     <router-link to="/detail/1">detail1</router-link>
     <router-link to="/detail/2">detail2</router-link>
-    <transition name="fade">
+    <!-- <transition name="fade"> -->
       <!-- <keep-alive> -->
-        <router-view :key="$route.fullPath"></router-view>
+        <!-- <router-view :key="$route.fullPath"></router-view> -->
+        <router-view></router-view>
       <!-- </keep-alive> -->
-    </transition>
+    <!-- </transition> -->
   </div>
 </template>
 
