@@ -55,3 +55,7 @@ Vue.component('Profile',Profile)
 .right
 ```
 - 所以不只是 一个 `entry` 可以使用这样的方式
+
+## vue2 面试题 
+
+- [interview](./interview/interview.md)
