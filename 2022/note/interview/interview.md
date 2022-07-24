@@ -3,16 +3,31 @@
 ##  v-if & v-for
 - 在设计的时候就出现了问题
   - 其实就是vue的源码那里，他的 for 执行优先级高于 if 
+- 源码位置
+ - /src/compailr/codegen/index  => genElement
 
 ## vue 的 data 为什么只能是一个函数
 - 过不了编译，是因为他做了一层判断而已
 - 在根判断的时候，会有一个 实例 的判断
 - 中间有一个地方用来保存所有的全局变量 data， 就会出现重复
+- 源码位置
+  - /src/core/instance/state => initData
 
 ## vue 的 v-for 为什么需要绑定 key
 - 当一个数组中改变了一个数据的时候 都会重头开始执行 `updateChilren`, 导致很多的浪费。  
 - 当存在 `key` 的时候，就会跳过这样的过程
   - 但是需要注意的是 用 `index` 会出现 `渲染的bug` 
-
+- /src/vdom/patch/ => updateChildren
 ## diff 算法
 - [diff](./diff.md)
+- /src/vdm/patch/ 
+
+## 组件化
+- /src/global-api/assacs 
+  - 对于全局东西的导入和注册 
+- /src/global-api/extend
+  - 这里看到一个子组件,他会通过一个 Object.create, 继承Vue的所有方法 
+  - 不同层级的组件,在不同的时机执行这个 `extend` 的东西
+- 执行组件的顺序
+  - 上部组件先 `创建`
+  - 下部组件先 `挂载` 

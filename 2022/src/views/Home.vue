@@ -27,10 +27,9 @@ export default {
     return {
       //provide 是一个对象,提供一个属性或方法
       foo: this.fooMsg,
-
       fooMethod: () => {
         console.log("父组件 fooMethod 被调用");
-      },
+      }
     };
   },
   data() {
