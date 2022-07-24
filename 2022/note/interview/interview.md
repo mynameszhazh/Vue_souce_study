@@ -27,8 +27,7 @@
   - 对于全局东西的导入和注册 
 - /src/global-api/extend
   - 这里看到一个子组件,他会通过一个 Object.create, 继承Vue的所有方法 
-  - 不同层级的组件,在不同的时机执行这个 `extend` 的东西
-- 执行组件的顺序
+  - 不同层级的组件,在不同的时机执行这个 `extend` 的东西执行组件的顺序
   - 上部组件先 `创建`
   - 下部组件先 `挂载` 
 
@@ -49,3 +48,6 @@
 
 ## mvc mvp mvvm 的区别
 - [mvc mvp mvvm](./mvvm.md)
+
+## 性能优化
+- [性能优化](performance.md)
