@@ -33,3 +33,21 @@
 
 ### watcher
 - 每个组件一个 watcher 进行操作 
+
+
+### 预习课总结
+- observer
+  - 通过 difinePoroptoty 对我的数据进行监听
+  - 每一个响应式数据 加入一个 dep
+- dep
+  - 每个 dep 保存好她的数据, 加入到 watcher 中
+  - 数据发生改变的时候, dep.notify 通知对应 wathcher 执行 相应的组件更新
+- watcher
+  - 拿到 dep 数据
+  - 监听dom元素
+- data
+  - 各种各样的数据,无论是递归,还是遍历处理,都是可以解决的
+- component render
+  - 前面通过依赖收集, 生成的更新函数,通过 `wathcher` 的 `update` 函数来执行对应的更新函数 
+- virual dom
+  - 更新函数执行,更新视图

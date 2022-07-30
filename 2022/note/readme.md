@@ -32,8 +32,14 @@
   - $nextTick
   - 双向数据绑定
   - vue-router
+  - 什么是递归组件
 
 
 ## vue3
 - [vue3](./vue3/readme.md)
   - 新特性
+
+
+## 源码系列
+- [组件化](./source/components.md)
+  - 基本知识
