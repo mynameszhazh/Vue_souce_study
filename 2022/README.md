@@ -3,3 +3,7 @@
 ## 我的笔记
 
 - [点我就好了](./note/readme.md)
+  - router
+  - vue2 新特性
+  - vue2 新特性
+  - vue3

@@ -64,6 +64,14 @@
   - 中间还有一个 callHook 的文件,相当于用在一个函数的作用域中了
 
 ## $nextTick
-- 通过事件循环 => event loop 
-  - vue 会对这个东西的队列做一个降级处理
-    - 也就是 有 `promise` => `setimeout` 这样 
+- `vue` 通过异步队列的方式来控制 `dom更新` 之后 `nextick` 回调执行
+- 优先使用 微任务循环,能确保队列的微任务再一次循环中,提前执行
+- 因为兼容的问题,需要做很多的降级处理
+  - 一些 `setimmeiate` 这些东西
+  - 最后就是  `settimeout` 可能会有问题,但是也没有办法
+
+## 双向数据绑定
+- [双向数据绑定](./model.md)
+
+## vue-router
+- [router](./router.md)
