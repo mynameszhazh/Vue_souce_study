@@ -26,8 +26,6 @@
       - 通过一个 push 添加一个 订阅者
     - removeSub
       - 通过 splice 删除一个 订阅者
-    - depend
-      - 将自己添加到当前订阅者对象的依赖列表 
     - notify
       - 数据更新时 , 遍历执行 subs 对象
 

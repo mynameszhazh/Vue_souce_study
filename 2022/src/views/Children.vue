@@ -1,8 +1,8 @@
 <template>
   <div class="children">
-    <div>我是 home 的一个 子组件: {{ name }} - {{ $log(logMsg) }}</div>
+    <!-- <div>我是 home 的一个 子组件: {{ name }} - {{ $log(logMsg) }}</div> -->
     <button @click="changeFoo">chang foo</button>
-    <SubChildren :img-url="imgMsg"></SubChildren>
+    <!-- <SubChildren :img-url="imgMsg"></SubChildren> -->
   </div>
 </template>
 
@@ -45,6 +45,10 @@ export default {
   methods: {
     changeFoo() {
       this.foo = "foo2";
+      this.$emit('change', {
+        name: 'foo2foo2',
+        age: 'age',
+      })
     },
   },
   components: { SubChildren },

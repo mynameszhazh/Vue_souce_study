@@ -1,19 +1,26 @@
 <template>
   <div>
-    <div>{{ home }}-observable data{{ count }}</div>
-    <button @click="changeComponet">loginCom</button>
-    <button @click="changeComponet(1)">chilrenCom</button>
-    <Children
-      name="text"
-      :title.sync="title"
-      alt="alt"
-      @change="change"
-    ></Children>
-    <!-- <transition name="slide-fade">
-      <keep-alive>
-        <component :is="currentComponent" name="text" title="titel"></component>
-      </keep-alive>
-    </transition> -->
+    <!--  预习视频 -->
+    <template>
+      <div>{{ home }}-observable data{{ count }}</div>
+      <button @click="changeComponet">loginCom</button>
+      <button @click="changeComponet(1)">chilrenCom</button>
+      <Children
+        name="text"
+        :title.sync="title"
+        alt="alt"
+        @change="change($event, title)"
+      ></Children>
+      <transition name="slide-fade">
+        <keep-alive>
+          <component
+            :is="currentComponent"
+            name="text"
+            title="titel"
+          ></component>
+        </keep-alive>
+      </transition>
+    </template>
   </div>
 </template>
 
@@ -29,15 +36,13 @@ export default {
       foo: this.fooMsg,
       fooMethod: () => {
         console.log("父组件 fooMethod 被调用");
-      }
+      },
     };
   },
   data() {
     return {
       home: "我就是一个home2",
-      detailInfo: {
-
-      },
+      detailInfo: {},
       currentComponent: null,
       fooMsg: "这是 foo",
       title: "我是标题",
@@ -48,8 +53,7 @@ export default {
       return store.count;
     },
   },
-  mounted() {
-  },
+  mounted() {},
   watch: {
     title(newValue, oldValue) {
       console.log(newValue, oldValue);
@@ -62,8 +66,9 @@ export default {
     }, 2000);
   },
   methods: {
-    change() {
-      console.log("我发生了一些改变！！");
+    change(item, val) {
+      console.log(item, val);
+      // console.log("我发生了一些改变！！");
     },
     changeComponet(index) {
       if (index == 1) {
