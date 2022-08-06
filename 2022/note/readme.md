@@ -52,3 +52,5 @@
     - extend
 
 ### vue2全家桶
+- [router](./source/router.md)
+  - 基本知识

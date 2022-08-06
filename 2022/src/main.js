@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './plugin/asyncComponet/index.js'
-import router from './router'
+// import router from './router'
+import router from './xrouter'
 Vue.config.productionTip = false
 
 // 注意只有在浏览器中的使用才能这样使用
