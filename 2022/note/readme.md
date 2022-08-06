@@ -41,5 +41,14 @@
 
 
 ## 源码系列
+### 组件化
 - [组件化](./source/components.md)
   - 基本知识
+  - element 源码案列
+    - 手写一个form 这样
+    - 小问题总结
+  - Notice 组件的手写方式
+    - render
+    - extend
+
+### vue2全家桶
