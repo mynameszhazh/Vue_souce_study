@@ -14,11 +14,11 @@ const routes = [
       auth: false 
     },
     childrens: [],
-    beforeEntry(to, from, next) {
-      if (window.isLogin) {
-        next()
-      }
-    }
+    // beforeEntry(to, from, next) {
+    //   if (window.isLogin) {
+    //     next()
+    //   }
+    // }
   },
   {
     path: '/detail/:id',
