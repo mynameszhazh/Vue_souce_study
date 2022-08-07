@@ -1,12 +1,15 @@
 <template>
   <div ref="box">
     <div class="login-page">
-      <h1 ref="h1">我是一个登录页面</h1>
+      <h1 ref="h1">我是一个登录页面{{this.$store.state.counter}}</h1>
+      <!-- <h2>这是一个getter {{this.$store.getters.doubleCounter}}</h2> -->
       <button ref="btn1" v-if="!isLogin" @click="login">登录</button>
       <button v-else @click="loginOut">注销</button>
     </div>
     <div class="test-btn">
       <button @click="routePathChange(2)">routePathChange</button>
+      <button @click="counterChange">counterChange</button>
+      <button @click="countergetChange">counterChange2</button>
     </div>
   </div>
 </template>
@@ -30,6 +33,12 @@ export default {
       this.islogin = false;
       if (!this.$route.query.redirect) return;
       this.$router.push(this.$route.query.redirect);
+    },
+    counterChange() {
+      this.$store.commit('add', 2)
+    },
+    countergetChange() {
+      this.$store.dispatch('add',1)
     },
     routePathChange(index) {
       if(index == 1) {

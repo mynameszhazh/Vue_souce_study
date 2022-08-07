@@ -54,3 +54,7 @@
 ### vue2全家桶
 - [router](./source/router.md)
   - 基本知识
+  - 任务点
+  - 观看源码任务点
+- [vuex](./source/vuex.md)
+
