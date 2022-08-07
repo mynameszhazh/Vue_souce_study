@@ -7,6 +7,12 @@ class XVueRouter {
     Vue.util.defineReactive(this, 'currentPath', '/')
     window.addEventListener('hashchange', this.onHashChange.bind(this))
     window.addEventListener('load', this.onHashChange.bind(this))
+
+    // 创建一个 路由映射表
+    this.routeMap = {}
+    options.routes.forEach(route => {
+      this.routeMap[route.path] = route
+    })
   }
   onHashChange() {
     this.currentPath = window.location.hash.slice(1)
@@ -25,9 +31,6 @@ XVueRouter.install = function (_Vue) {
       }
     }
   })
-  // Object.defineProperty(Vue.prototype, '$router', {
-  //   get () { return this.$options.router}
-  // })
 
   Vue.component('router-link', {
     props: {
@@ -43,13 +46,9 @@ XVueRouter.install = function (_Vue) {
 
   Vue.component('router-view', {
     render(h) {
-      let component = null
       // 这是非常不合理的选择路由的方式
-      this.$router.$options.routes.forEach(route => {
-        if (route.path == this.$router.currentPath) {
-          component = route.component
-        }
-      })
+      const {routeMap, currentPath} = this.$router
+      const component = routeMap[currentPath].component || null
       return h(component)
     }
   })
