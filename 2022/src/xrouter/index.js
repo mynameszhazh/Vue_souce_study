@@ -13,20 +13,10 @@ const routes = [
     meta: {
       auth: false 
     },
-    childrens: [],
-    // beforeEntry(to, from, next) {
-    //   if (window.isLogin) {
-    //     next()
-    //   }
-    // }
-  },
-  {
-    path: '/detail/:id',
-    name: 'Detail',
-    meta: {
-      auth: false 
-    },
-    component: () => import('../views/Detail.vue')
+    childrens: [{
+      path: '/home/banner',
+      component: {render(h) {return h('div', 'nihao banner')}} 
+    }],
   },
   {
     path: '/login',
@@ -39,17 +29,4 @@ const router = new VueRouter({
   routes,
 })
 
-// 需要进行一个权限验证
-// router.beforeEach((to, from, next) => {
-//   // 需要通过一个权限验证
-//   if (to.meta.auth) {
-//     if (window.isLogin) {
-//       next()
-//     } else {
-//       next('/login?redirect=' + to.fullPath)
-//     }
-//   } else {
-//     next()
-//   }
-// })
 export default router

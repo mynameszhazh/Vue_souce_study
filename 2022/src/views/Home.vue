@@ -20,6 +20,7 @@
           ></component>
         </keep-alive>
       </transition>
+      <router-view></router-view>
     </template>
   </div>
 </template>

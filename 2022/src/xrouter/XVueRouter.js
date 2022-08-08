@@ -1,3 +1,5 @@
+import View from './components/View'
+import Link from './components/Link'
 let Vue
 class XVueRouter {
   constructor(options) {
@@ -32,26 +34,9 @@ XVueRouter.install = function (_Vue) {
     }
   })
 
-  Vue.component('router-link', {
-    props: {
-      to: {
-        type: String,
-        required: true
-      }
-    },
-    render(h) {
-      return h('a', { attrs: { href: '#' + this.to }, class: 'router-link' }, this.$slots.default)
-    }
-  })
+  Vue.component('router-link', Link)
 
-  Vue.component('router-view', {
-    render(h) {
-      // 这是非常不合理的选择路由的方式
-      const {routeMap, currentPath} = this.$router
-      const component = routeMap[currentPath].component || null
-      return h(component)
-    }
-  })
+  Vue.component('router-view', View)
 }
 
 export default XVueRouter
