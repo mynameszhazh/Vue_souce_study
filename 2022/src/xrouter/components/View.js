@@ -5,18 +5,24 @@ export default {
     let depth = 0
     let parent = this.$parent
     // 通过一层一层的晚上找, 找到你当前所在的层级就完事了
-    while(parent) {
+    while (parent) {
       let vnodeData = parent.$vnode && parent.$vnode.data
-      if(vnodeData) {
-        if(vnodeData.routerView) {
-          depth++ 
+      if (vnodeData) {
+        if (vnodeData.routerView) {
+          depth++
         }
       }
-      parent = this.$parent
+      parent = parent.$parent
     }
-    // 这是非常不合理的选择路由的方式
-    const { routeMap, currentPath } = this.$router
-    const component = routeMap[currentPath].component || null
+    // 这是非常不合理的选择路由的方式, 没有做到 层级的判断
+    // const { routeMap, currentPath } = this.$router
+    // const component = routeMap[currentPath].component || null
+    let component = null
+    let route = this.$router.matched[depth]
+    console.log(route)
+    if (route) {
+      component = route.component
+    }
     return h(component)
   }
 }

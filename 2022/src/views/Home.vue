@@ -11,7 +11,7 @@
         alt="alt"
         @change="change($event, title)"
       ></Children>
-      <transition name="slide-fade">
+      <!-- <transition name="slide-fade">
         <keep-alive>
           <component
             :is="currentComponent"
@@ -19,7 +19,7 @@
             title="titel"
           ></component>
         </keep-alive>
-      </transition>
+      </transition> -->
       <router-view></router-view>
     </template>
   </div>

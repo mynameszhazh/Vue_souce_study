@@ -6,18 +6,42 @@ class XVueRouter {
     this.$options = options
     // 这个一定要是一个 响应式的数据,不然改变的时候,我的视图是不会发生变化的
     // this.currentPath = '/home'
-    Vue.util.defineReactive(this, 'currentPath', '/')
+    // 第二种方式,对我的 currentPath 进行一个响应式监听
+    // Vue.util.defineReactive(this, 'currentPath', '/')
+    this.currentPath = '/'
+    Vue.util.defineReactive(this, 'matched', [])
+    this.match()
+
     window.addEventListener('hashchange', this.onHashChange.bind(this))
     window.addEventListener('load', this.onHashChange.bind(this))
 
     // 创建一个 路由映射表
-    this.routeMap = {}
-    options.routes.forEach(route => {
-      this.routeMap[route.path] = route
-    })
+    // this.routeMap = {}
+    // options.routes.forEach(route => {
+    //   this.routeMap[route.path] = route
+    // })
   }
   onHashChange() {
     this.currentPath = window.location.hash.slice(1)
+    this.matched = []
+    this.match()
+  }
+  match(routes) {
+    routes = routes || this.$options.routes
+    for(let route of routes) {
+      // 这里是一个非常垃圾的写法, 很多的边界条件都没有判断
+      if(route.path == '/' && this.currentPath == '/'){
+        this.matched.push(route)
+      }
+
+      // 如果不是 第一个路径, 就可以开放递归操作了
+      if(route.path !== '/' && this.currentPath.indexOf(route.path) !== -1) {
+        this.matched.push(route)
+        if(route.childrens) {
+          this.match(route.childrens)
+        }
+      }
+    }
   }
 }
 

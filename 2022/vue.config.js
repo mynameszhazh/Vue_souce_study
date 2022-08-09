@@ -12,7 +12,8 @@ module.exports = {
     //     }, 1000)
     //   })
     // },
-    proxy: 'http://localhost:3000'
+    port: 8081,
+    open: true,
   },
   chainWebpack: config => {
     config
@@ -22,7 +23,7 @@ module.exports = {
       .loader('vue-loader')
       .tap(options => {
         options.transformAssetUrls = {
-          SubChildren : 'img-url',
+          SubChildren: 'img-url',
         }
         return options;
       });

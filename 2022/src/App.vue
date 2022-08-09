@@ -2,6 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" @click="goHome" />
     <router-link to="/home">home</router-link>
+    <router-link to="/home/banner">home banner</router-link>
     <router-link to="/login">login</router-link>
     <!-- <transition name="fade"> -->
       <!-- <keep-alive> -->

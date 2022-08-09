@@ -5,7 +5,7 @@ import './plugin/asyncComponet/index.js'
 import router from './xrouter'
 // import store from './store'
 import store from './xstore'
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
 // 注意只有在浏览器中的使用才能这样使用
 Vue.prototype.$log = window.console.log
