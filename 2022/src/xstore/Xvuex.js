@@ -3,15 +3,25 @@ class Xvuex {
   constructor(options) {
     this.mutations = options.mutations
     this.actions = options.actions
-    // this.state = new Vue({
-    //   data() {
-    //     return options.state
-    //   }
-    // })
+    this._wrapperGetter = options.getters
+    this.getters = {}
+    let computed = {}
+    let store = this
+    Object.keys(this._wrapperGetter).forEach(key => {
+      let fn = store._wrapperGetter[key]
+      computed[key]  = function () {
+        return fn(store.state) 
+      } 
+      Object.defineProperty(store.getters, key, {
+        // 这里获取到了 vue computer 的值了
+        get: () => store._vm[key]
+      })
+    })
     this._vm = new Vue({
       data: {
         $$state: options.state
-      }
+      },
+      computed
     })
     this.commit = this.commit.bind(this)
     this.dispatch = this.dispatch.bind(this)

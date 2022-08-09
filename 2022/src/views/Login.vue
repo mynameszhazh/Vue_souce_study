@@ -2,7 +2,7 @@
   <div ref="box">
     <div class="login-page">
       <h1 ref="h1">我是一个登录页面{{this.$store.state.counter}}</h1>
-      <!-- <h2>这是一个getter {{this.$store.getters.doubleCounter}}</h2> -->
+      <h2>这是一个getter {{this.$store.getters.doubleCounter}}</h2>
       <button ref="btn1" v-if="!isLogin" @click="login">登录</button>
       <button v-else @click="loginOut">注销</button>
     </div>
