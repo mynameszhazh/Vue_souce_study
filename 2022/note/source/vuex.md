@@ -4,13 +4,14 @@
 - 优点
   - 集中处理数据
   - 可预测的数据操作 
+- [完整 es6写法源码](./vuex_sourse.js)
 ## 作业
 ### 问题
-- 探索 vue-router 嵌套的原理
-  - view 文件里面
 - vuex 实现 getters 的原理
   - store 的里面可以看到一些不一样的东西
-- 了解vue 响应式
+- 模块相关
+- 插件机制
+- mapgetter 的实现原理
 
 ### 解答思路
 - 这个 `vue-router` 的嵌套问题

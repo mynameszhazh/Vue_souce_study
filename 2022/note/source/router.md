@@ -16,6 +16,9 @@
 - 实现两个全局组件 router-view 和 router-link
   - 注意这两个方法,是在引入 vue-router 的时候才会被注册的组件
 
+- addRoute 是怎么实现的
+
+- 声明周期的钩子是怎么实现的
 
 ## 观看源码任务点
 - 为什么不是在 beforCreate 中执行, 我的函数挂载
