@@ -58,3 +58,5 @@
   - 观看源码任务点
 - [vuex](./source/vuex.md)
 
+### vue mvvm
+- [响应式](../source_my/reactive1.html)
