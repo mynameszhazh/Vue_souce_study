@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    let obj = {
+      val: 123,
+      val1: 456,
+      oobj: {
+        name: '123',
+      }
+    }
+    function defineReactive(obj, key, val) {
+      if(val instanceof Object) {
+        Observer(val)
+      }
+      Object.defineProperty(obj, key, {
+        get() {
+          console.log('get',key, val)
+          return val
+        },
+        set(newVal) {
+          if (newVal !== val) {
+            console.log('set',key, val, newVal)
+            if(newVal instanceof Object) {
+              Observer(newVal)
+            }
+            val = newVal
+          }
+        }
+      })
+    }
+    function Observer(obj) {
+      Object.keys(obj).forEach(key => {
+        defineReactive(obj, key, obj[key])
+      })
+    }
+    
+    Observer(obj)
+    // obj.val
+    // obj.val1
+    // obj.val = 777
+    // obj.val1 = 888
+    obj.oobj.name = 12 
+  </script>
+</body>
+
+</html>
