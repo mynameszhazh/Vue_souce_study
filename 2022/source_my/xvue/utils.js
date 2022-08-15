@@ -6,12 +6,12 @@ export const defineReactive = function (obj, key, val) {
   }
   Object.defineProperty(obj, key, {
     get() {
-      console.log('get', key, val)
+      // console.log('get', key, val)
       return val
     },
     set(newVal) {
       if (newVal !== val) {
-        console.log('set', key, val, newVal)
+        // console.log('set', key, val, newVal)
         if (newVal instanceof Object) {
           observer(newVal)
         }

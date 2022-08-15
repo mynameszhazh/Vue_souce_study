@@ -7,14 +7,19 @@
   <title>xvue</title>
 </head>
 <body>
-  <div id="app">{{count}}</div> 
+  <div id="app">
+    <div class="box">{{count}}</div>
+    <div class="box1" x-text="count"></div>
+    <div class="box2" x-html="desc"></div>
+  </div> 
 
   <script type="module">
     import {Xvue} from './index.js'
-    debugger
     let app = new Xvue({
+      el: '#app',
       data: {
-        count: 1
+        count: 1,
+        desc: '<h1>my name english</h1>'
       }
     })
     setInterval(() => {
