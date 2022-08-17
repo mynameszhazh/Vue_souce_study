@@ -8,9 +8,10 @@
 </head>
 <body>
   <div id="app">
-    <div class="box">{{count}}</div>
+    <div class="box" @click="onclick">{{count}}</div>
     <div class="box1" x-text="count"></div>
     <div class="box2" x-html="desc"></div>
+    <input class="box3" x-model="desc" />
   </div> 
 
   <script type="module">
@@ -20,11 +21,16 @@
       data: {
         count: 1,
         desc: '<h1>my name english</h1>'
-      }
+      },
+      methods: {
+        onclick() {
+          this.count++ 
+        }
+      },
     })
-    setInterval(() => {
-      app.count++ 
-    }, 2000);
+    // setInterval(() => {
+    //   app.count++ 
+    // }, 2000);
   </script>
 </body>
 </html>

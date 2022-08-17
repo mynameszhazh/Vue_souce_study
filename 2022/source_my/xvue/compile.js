@@ -46,6 +46,10 @@ export const Compiler = class {
         // 这里可能 就是 text 和 html
         this[dir] && this[dir](node, exp)
       }
+      if (this.isEvent(attrName)) {
+        let dir = attrName.substring(1)
+        this.eventHander(node, dir,exp)
+      }
     })
   }
 
@@ -63,14 +67,33 @@ export const Compiler = class {
     return attrName.indexOf('x-') === 0
   }
 
+  isEvent(attrName) {
+    return attrName.indexOf('@') === 0
+  }
+
+  eventHander(node, event, method) {
+    const fn = this.$vm.$options.methods && this.$vm.$options.methods[method]
+    node.addEventListener(event, fn.bind(this.$vm))
+  }
+  // v-text
   text(node, exp) {
     // node.textContent = this.$vm[exp]
     this.update(node, exp, 'text')
   }
-
+  // v-html
   html(node, exp) {
     // node.innerHTML = this.$vm[exp]
     this.update(node, exp, 'html')
+  }
+  // v-model
+  model(node, exp) {
+    // 更新视图
+    this.update(node, exp, 'model')
+    // 更新事件
+    node.addEventListener('input', (e) => {
+      // 将新的值给到 this.$vm 就好了
+      this.$vm[exp] = e.target.value
+    })
   }
   textupdater(node, val) {
     node.textContent = val
@@ -78,5 +101,9 @@ export const Compiler = class {
 
   htmlupdater(node, val) {
     node.innerHTML = val
+  }
+  modelupdater(node, val) {
+    // 这个是 input 的 value
+    node.value = val
   }
 }
