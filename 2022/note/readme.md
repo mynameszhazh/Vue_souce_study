@@ -71,3 +71,8 @@
 ### xvue
 
 - 去看 那个 `anything` 这个文件就可以了
+
+### 源码学习方法
+- [study1](./source/study.md)
+  - 基本知识
+    - 环境的搭建
