@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue 更新流程</title>
+  <script src="../lib/vue2.6.10.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="box">{{foo}}</div>
+  </div>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          foo: 'foo'
+        }
+      },
+      mounted () {
+        setInterval(() => {
+          this.foo = Math.random()
+          this.foo = Math.random()
+          this.foo = Math.random()
+          console.log(box.innerHTML)
+          this.$nextTick(() => {
+            console.log(box.innerHTML)
+          })
+        }, 2000)
+      },
+    })
+  </script>
+</body>
+</html>
