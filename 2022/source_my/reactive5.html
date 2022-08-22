@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/node_modules/snabbdom/dist/snabbdom.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    let { init, h } = snabbdom
+
+    let obj = {
+      foo: '123'
+    }
+    // 类似于 vue中的 webpack 
+    let patch = init([])
+    let vnode = null
+    function defineReactive(obj, key, val) {
+      Object.defineProperty(obj, key, {
+        get() {
+          return val
+        },
+        set(newVal) {
+          if (newVal !== val) {
+            val = newVal
+            update()
+          }
+        }
+      })
+    }
+
+    defineReactive(obj, 'foo', new Date().toLocaleTimeString())
+
+    function update() {
+      // app.innerText = obj.val
+      vnode = patch(vnode, h('div#app', obj.foo))
+    }
+    vnode = patch(app, h('div#app', obj.foo))
+    setInterval(() => {
+      obj.foo = new Date().toLocaleTimeString()
+    }, 1000)
+  </script>
+</body>
+
+</html>

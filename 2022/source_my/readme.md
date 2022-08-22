@@ -8,6 +8,10 @@
 - [array](./reactive4.html)
   - 处理一下 数组的响应式
 
+- [测试虚拟dom的基本实现](./reactive5.html)
+  - 主要是用到一个 `snabbdom` 的库
+  - 这个里面的方法和 vue2 源码的东西都是一样的
+
 ## 手撕 vue
 
 - [手撕 vue](./xvue/xvue.md)
