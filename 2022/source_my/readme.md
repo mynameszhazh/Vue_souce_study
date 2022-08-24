@@ -30,3 +30,6 @@
     - this.run()
     - flushWatherQueuer 等等
       - 这样的东西,是比较好解决问题的
+
+- [组件编译验证](./flow4.html)
+  - parse

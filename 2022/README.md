@@ -10,6 +10,10 @@
   - 源码系列
     - 组件化
     - vue2全家桶
+    - diff
+    - component
+    - compiler
+
 
 - [source](./source_my/readme.md)
   - reactive 
