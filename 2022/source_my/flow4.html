@@ -11,6 +11,10 @@
 
 <body>
   <div id="app">
+    <p v-if="foo">foo</p>
+    <ul>
+      <li v-for="( item,index ) in 4" :key="index">{{ item }}</li>
+    </ul>
     <div class="staic">
       static
       <span>text</span>
@@ -37,11 +41,11 @@
     })
     console.log(app.$options.render)
   /*
-      ƒ anonymous(
-        ) {
-        with(this){return _c('div',{attrs:{"id":"app"}},[_c('div',{attrs:{"id":"box"}},[_v(_s(foo))]),_v(" "),_c('comp')],1)}
-      }
-    */
+          ƒ anonymous(
+            ) {
+            with(this){return _c('div',{attrs:{"id":"app"}},[_c('div',{attrs:{"id":"box"}},[_v(_s(foo))]),_v(" "),_c('comp')],1)}
+          }
+        */
   </script>
 </body>
 
