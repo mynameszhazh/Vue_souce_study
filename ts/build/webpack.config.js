@@ -4,6 +4,25 @@ module.exports = {
   mode: 'development',
   // 入口文件
   entry: './src/index.ts',
+  devServer: {
+    onBeforeSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+      devServer.app.get('/api/feature', function (req, res) {
+        res.json([
+          {
+            id: 12,
+            name: 'xjh1'
+          },
+          {
+            id: 13,
+            name: 'xjh12'
+          }
+        ])
+      });
+    },
+  },
   // 输出
   output: {
     // 文件名
@@ -11,7 +30,7 @@ module.exports = {
   },
   // 需要解决的文件
   resolve: {
-    extensions:['.js', '.ts', '.tsx'] 
+    extensions: ['.js', '.ts', '.tsx']
   },
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'source-map',
@@ -27,7 +46,7 @@ module.exports = {
         // 排除的文件夹
         exclude: /node_modules/
       }
-    ] 
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({

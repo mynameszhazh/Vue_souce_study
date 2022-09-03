@@ -1,4 +1,4 @@
-function add(a, b) {
-  return  a  + b
-}
-console.log(add, add(1,2))
+import { feature } from './types/feature.d'
+import {getFeature} from './api/index'
+
+// getFeature<feature>({})
