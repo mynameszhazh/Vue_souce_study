@@ -1,4 +1,4 @@
-export interface feature<T> {
-  ok: 0 | 1,
-  data: T
+export interface Feature {
+  id: number;
+  name: string;
 }

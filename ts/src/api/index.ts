@@ -1,5 +1,6 @@
 import axios from 'axios'
+import { Feature } from '../types/feature.d'
 
-export function getFeature<T>(params) {
-  return axios.get<T>('', params)
+export function getFeature(params = {}) {
+  return axios.get<Feature[]>('/api/feature', params)
 }
