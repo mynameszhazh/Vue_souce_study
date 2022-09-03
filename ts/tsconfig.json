@@ -1,3 +1,5 @@
 {
-  "webpack": "lu"
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
 }
