@@ -16,6 +16,7 @@ module.exports = {
     open: true,
   },
   chainWebpack: config => {
+    // 通过这个方式,就可以解析 vue 模板的 img 
     config
       .module
       .rule('vue')
@@ -27,5 +28,25 @@ module.exports = {
         }
         return options;
       });
+
+    // svg 模块的配置, 排除 icons 文件
+    config.module.rule('svg')
+      .exclude.add(resolve('./src/icons'))
+
+    // 添加新的规则 icons
+    config.module.rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('./src/icons')).end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({ symbolId: 'icon-[name]' })
+  },
+  // 传统的配置使用
+  configureWebpack: {
+    name: 'title'
+  },
+  // 链式的配置使用方式给
+  chainWebpack(config) {
+
   }
 }
