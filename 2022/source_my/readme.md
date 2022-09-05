@@ -33,3 +33,9 @@
 
 - [组件编译验证](./flow4.html)
   - parse
+
+## vue3
+- [doc](./vue3/reactive.md)
+- 响应式原理
+- 依赖收集的方式
+  - [case1](./vue3/reactive.js)
